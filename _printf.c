@@ -21,20 +21,31 @@ int _printf(const char *format, ...)
 	{
 		switch (format[i])
 		{
-			case 'c':
-				a = (char) va_arg(args, int);
-				count += write(1, &a, 1);
-				break;
-
 			case '%':
-				a = (char) va_arg(args, int);
-				count += write(1, &a, 1);
+				if (format[i + 1] == 'c')
+				{
+					a = (char) va_arg(args, int);
+					count += write(1, &a, 1);
+					i++;
+				}
+				else if (format[i + 1] == '%')
+				{
+					a = (char) va_arg(args, int);
+					count += write(1, &a, 1);
+					i++;
+				}
+				else if (format[i + 1] == 's')
+				{
+					tmp = va_arg(args, char *);
+					count += write(1, tmp, strlen(tmp));
+					i++;
+				}
+				else
+				{
+					return (-1);
+				}
 				break;
 
-			case 's':
-				tmp = va_arg(args, char *);
-				count += write(1, tmp, strlen(tmp));
-				break;
 
 			default:
 				count += write(1,&format[i], 1);
