@@ -23,13 +23,13 @@ int _printf(const char *format, ...)
 		{
 			case '%':
 				r_count = check(args_copy, (format + i + 1));
-
 				count += r_count;
-				i++;
 				break;
 			default:
 				count += write(1, &format[i], 1);
 		}
+		if (format[i + 1] == 'c' || format[i + 1] == '%' || format[i + 1] == 's')
+			i++;
 		i++;
 	}
 	return (count);
