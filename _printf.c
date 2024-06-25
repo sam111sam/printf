@@ -23,7 +23,11 @@ int _printf(const char *format, ...)
 		{
 			case '%':
 				r_count = check(args_copy, (format + i + 1));
-				count += r_count;
+
+				if (r_count >= 0)
+					count += r_count;
+				else
+					return (r_count);
 
 				if (format[i + 1] == 'c' || format[i + 1] == '%' || format[i + 1] == 's')
 					i++;
@@ -66,8 +70,10 @@ int check(va_list args, const char *cp)
 	else
 	{
 		tmp = "";
-		if (*cp != 0)
+		if (*cp != 0 && *cp != ' ')
 			tmp = "%";
+		else
+			return (-1);
 		return (write(1, tmp, strlen(tmp)));
 	}
 }
