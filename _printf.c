@@ -23,15 +23,9 @@ int _printf(const char *format, ...)
 		{
 			case '%':
 				r_count = check(args_copy, (format + i + 1));
-				if (r_count  > 0)
-				{
-					count += r_count;
-					i++;
-				}
-				else
-				{
-					return (-1);
-				}
+
+				count += r_count;
+				i++;
 				break;
 			default:
 				count += write(1, &format[i], 1);
