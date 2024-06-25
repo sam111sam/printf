@@ -48,6 +48,7 @@ int _printf(const char *format, ...)
 int check(va_list args, const char *cp)
 {
 	char *tmp, a;
+	int x;
 
 	if (*cp == 'c')
 	{
@@ -66,6 +67,11 @@ int check(va_list args, const char *cp)
 			return (write(1, tmp, strlen(tmp)));
 		else
 			return (write(1, "(null)", 6));
+	}
+	else if (*cp == 'd' || *cp == 'i')
+	{
+		x =  va_arg(args, int);
+		return (write(1, &x, sizeof(x)));
 	}
 	else
 	{
