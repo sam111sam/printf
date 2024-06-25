@@ -70,9 +70,8 @@ int check(va_list args, const char *cp)
 	}
 	else
 	{
-		tmp = "Error";
-		write(2, &a, strlen(tmp));
-		return (-1);
+		tmp = "%";
+		return (write(1, &a, strlen(tmp)));
 	}
 }
 
