@@ -29,7 +29,7 @@ int _printf(const char *format, ...)
 				else
 					return (r_count);
 
-				if (format[i + 1] == 'c' || format[i + 1] == '%' || format[i + 1] == 's')
+				if (format[i + 1] == 'c' || format[i + 1] == '%' || format[i + 1] == 's' || format[i + 1] == 'd' || format[i + 1] == 'i')
 					i++;
 				break;
 			default:
