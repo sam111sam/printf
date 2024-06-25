@@ -68,7 +68,7 @@ int check(va_list args, const char *cp)
 		tmp = "";
 		if (*cp != 0)
 			tmp = "%";
-		return (write(1, &a, strlen(tmp)));
+		return (write(1, tmp, strlen(tmp)));
 	}
 }
 
