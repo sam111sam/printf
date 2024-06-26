@@ -29,7 +29,9 @@ int _printf(const char *format, ...)
 				else
 					return (r_count);
 
-				if (format[i + 1] == 'c' || format[i + 1] == '%' || format[i + 1] == 's' || format[i + 1] == 'd' || format[i + 1] == 'i')
+				if (format[i + 1] == 'c' || format[i + 1] == '%' || format[i + 1] == 's')
+					i++;
+				if (format[i + 1] == 'd' || format[i + 1] == 'i')
 					i++;
 				break;
 			default:
@@ -47,7 +49,7 @@ int _printf(const char *format, ...)
  */
 int check(va_list args, const char *cp)
 {
-	char *tmp, a;
+	char *tmp, a, buf[20];
 	int x;
 
 	if (*cp == 'c')
@@ -71,7 +73,8 @@ int check(va_list args, const char *cp)
 	else if (*cp == 'd' || *cp == 'i')
 	{
 		x =  va_arg(args, int);
-		return (write(1, &x, sizeof(x)));
+		sprintf(buf, "%d", x);
+		return (write(1, buf, strlen(buf)));
 	}
 	else
 	{
